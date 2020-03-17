@@ -1,6 +1,6 @@
 # ExSignal
 
-**TODO: Add description**
+Django like signals implementation in elixir
 
 ## Installation
 
@@ -15,7 +15,21 @@ def deps do
 end
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/ex_signal](https://hexdocs.pm/ex_signal).
 
+```elixir
+  defmodule SignalsDemo do
+    # The result of any function decorated as a signal
+    # is sent to the receivers of the named signal
+    @signal("some_signal_name")
+    def foo() do
+      :foo
+    end
+
+    # Receiever is any arity 1 function
+    # Gets called with the result of the sender
+    @receiver("some_signal_name")
+    def bar(foo) do
+      IO.inspect("Recieved #{foo}")
+    end
+  end
+```
